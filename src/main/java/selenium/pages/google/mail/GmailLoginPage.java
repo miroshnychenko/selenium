@@ -4,12 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.pages.AbstractPage;
 
-public class GmailLoginPage {
+public class GmailLoginPage extends AbstractPage{
 
-    private WebDriver driver;
-    private WebDriverWait wait;
 
     private By emailFieldLocator = By.cssSelector("input[type=\"email\"]");
     private By nextButtonEmailLocator = By.id("identifierNext");
@@ -18,8 +16,7 @@ public class GmailLoginPage {
 
 
     public GmailLoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+        super(driver);
     }
 
     public void enterEmailAndCLickNext(String login) {
@@ -30,15 +27,9 @@ public class GmailLoginPage {
         enterValueAndCLickNext(password, passwordFieldLocator, nextButtonPasswordLocator);
     }
 
-    private WebElement waitForElement(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-        return driver.findElement(locator);
-
-    }
-
     private void enterValueAndCLickNext(String value, By fieldLocator, By nextButtonLocator) {
-        WebElement field = waitForElement(fieldLocator);
-        WebElement nextButton = waitForElement(nextButtonLocator);
+        WebElement field = wait.until(ExpectedConditions.elementToBeClickable(fieldLocator));
+        WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(nextButtonLocator));;
         field.clear();
         field.sendKeys(value);
         nextButton.click();

@@ -3,13 +3,13 @@ package selenium.pages.stylus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.pages.AbstractPage;
 
-public class MainPage {
+public class MainPage extends AbstractPage{
     private By searchFieldLocator = By.name("q");
-    private WebDriver driver;
 
     public MainPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void search(String searchQuery) {

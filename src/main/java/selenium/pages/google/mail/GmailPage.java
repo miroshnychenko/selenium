@@ -4,22 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.pages.AbstractPage;
 
 import java.util.List;
 
-public class GmailPage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class GmailPage extends AbstractPage{
 
     private By accountIconLocator = By.cssSelector(".gb_db.gbii");
     private By inboxTableRowsLocator = By.cssSelector(".Cp table tr");
     private By accoutEmailLocator = By.cssSelector(".gb_Cb .gb_Ib");
 
     public GmailPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 30);
+        super(driver);
     }
 
     public void clickOnMyAccountIcon() {

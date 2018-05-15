@@ -3,13 +3,13 @@ package selenium.pages.stylus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import selenium.pages.AbstractPage;
 
-public class ProductDetailsPage {
-    private WebDriver driver;
+public class ProductDetailsPage extends AbstractPage{
     private By productTitleLocator = By.cssSelector(".title h1");
 
     public ProductDetailsPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public String getProductTitle() {

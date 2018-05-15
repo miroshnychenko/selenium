@@ -22,5 +22,6 @@ public class GoogleSearchTest extends WebDriverTestBase {
 
         Assert.assertTrue(actual.contains(expected), "\nExpected: Link text should contain " + expected
                 + "\nActual: Link text is :" + actual + "\n");
+        Assert.assertTrue(resultPage.isPageTitleCorrect("Selenium - Пошук Google"));
     }
 }
