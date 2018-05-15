@@ -1,61 +1,27 @@
 package com.google.mail;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import selenium.core.WebDriverTestBase;
+import selenium.pages.google.mail.GmailLoginPage;
+import selenium.pages.google.mail.GmailPage;
 
-public class LoginTest {
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    @BeforeClass
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
-    }
+public class LoginTest extends WebDriverTestBase {
 
     @Test
     public void loginTest() {
-        String login = "kitautotest";
+        String email = "kitautotest@gmail.com";
         String password = "Qwer1234!";
 
         driver.get("https://gmail.com");
+        GmailLoginPage loginPage = new GmailLoginPage(driver);
+        loginPage.enterEmailAndCLickNext(email);
+        loginPage.enterPasswordAndClickNext(password);
 
-        WebElement emailField = driver.findElement(By.cssSelector("input[type=\"email\"]"));
-        WebElement nextButtonEmail = driver.findElement(By.id("identifierNext"));
+        GmailPage gmailPage = new GmailPage(driver);
+        gmailPage.clickOnMyAccountIcon();
 
-        emailField.clear();
-        emailField.sendKeys(login);
-        nextButtonEmail.click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordNext")));
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type=\"password\"]"));
-        WebElement nextButtonPassword = driver.findElement(By.id("passwordNext"));
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type=\"password\"]")));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-        nextButtonPassword.click();
-
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".gb_db.gbii")));
-        WebElement accountIcon = driver.findElement(By.cssSelector(".gb_db.gbii"));
-        accountIcon.click();
-
-        Assert.assertTrue(driver.findElement(By.cssSelector(".gb_Cb .gb_Ib")).getText().equals("kitautotest@gmail.com"));
-        Assert.assertTrue(driver.findElements(By.cssSelector(".Cp table tr")).size()>0);
+        Assert.assertTrue(gmailPage.isEmailCorrect(email));
+        Assert.assertTrue(gmailPage.getInboxTableRows().size() > 0);
     }
 }

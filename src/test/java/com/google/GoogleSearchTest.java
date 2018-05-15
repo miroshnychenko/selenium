@@ -1,39 +1,25 @@
 package com.google;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import selenium.core.WebDriverTestBase;
+import selenium.pages.google.search.GoogleResultPage;
+import selenium.pages.google.search.GoogleSearchPage;
 
-public class GoogleSearchTest {
-
-    private WebDriver driver;
-
-    @BeforeClass
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
-    }
+public class GoogleSearchTest extends WebDriverTestBase {
 
     @Test
     public void searchTest() {
-        driver.get("https://google.com.ua");
-        WebElement searchInput = driver.findElement(By.name("q"));
-        searchInput.sendKeys("Selenium");
-        searchInput.submit();
-        WebElement firstSearchResult = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[2]/div/div[1]/div/div/h3/a"));
+
+        GoogleSearchPage searchPage = new GoogleSearchPage(driver);
+        searchPage.get("https://google.com.ua");
+        searchPage.search("Selenium");
+
+        GoogleResultPage resultPage = new GoogleResultPage(driver);
+        String actual = resultPage.getFirstLink().getText();
+
         String expected = "Selenium";
-        String actual = firstSearchResult.getText();
+
         Assert.assertTrue(actual.contains(expected), "\nExpected: Link text should contain " + expected
                 + "\nActual: Link text is :" + actual + "\n");
     }
