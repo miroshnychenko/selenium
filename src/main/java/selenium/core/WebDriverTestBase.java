@@ -18,13 +18,6 @@ public class WebDriverTestBase {
 
     @BeforeClass
     public void setUp() {
-/*        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);*/
-
         switch (browser) {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
