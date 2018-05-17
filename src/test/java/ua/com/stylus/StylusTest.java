@@ -2,21 +2,23 @@ package ua.com.stylus;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import selenium.core.PropertiesCache;
 import selenium.core.WebDriverTestBase;
 import selenium.pages.stylus.MainPage;
 import selenium.pages.stylus.ProductDetailsPage;
 import selenium.pages.stylus.SearchPage;
 
+import java.io.UnsupportedEncodingException;
 
 public class StylusTest extends WebDriverTestBase {
-    private String searchQuery = "Sony Z2";
+    private String searchQuery = String.valueOf(PropertiesCache.getProperty("stylus.searchQuery"));
     private String searchUrl = searchQuery.replace(" ", "+");
 
     @Test
-    public void StylusSearchTest() {
-        String expectedProductTitle = "Смартфон Sony Xperia Z2 Black";
+    public void StylusSearchTest() throws UnsupportedEncodingException{
+        String expectedProductTitle = String.valueOf(PropertiesCache.getProperty("stylus.expectedProductTitle")
+                .getBytes("ISO8859-1"));
         driver.get("https://stylus.com.ua");
-
         MainPage mainPage = new MainPage(driver);
         mainPage.search(searchQuery);
 
@@ -28,6 +30,5 @@ public class StylusTest extends WebDriverTestBase {
         ProductDetailsPage productDetailsPage = new ProductDetailsPage(driver);
         String actualProductTitle = productDetailsPage.getProductTitle();
         Assert.assertEquals(actualProductTitle, expectedProductTitle);
-
     }
 }
