@@ -15,7 +15,7 @@ public class GoogleSearchTestWithFactory extends WebDriverTestBase{
         searchPage.search("Selenium");
 
         GoogleResultPageWithFactory resultPage = PageFactory.initElements(driver, GoogleResultPageWithFactory.class);
-        String actual = resultPage.getLink().getText();
+        String actual = resultPage.getFirstLink().getText();
 
         Assert.assertTrue(actual.contains("Selenium"), "\nExpected: Link text should contain \"Selenium\" \nActual: Link text is :" + actual + "\n");
 

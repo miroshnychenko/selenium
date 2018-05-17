@@ -8,13 +8,13 @@ import selenium.pages.AbstractPage;
 
 public class GoogleResultPageWithFactory extends AbstractPage{
     @FindBy(how = How.XPATH, using = "//*[@id=\"rso\"]/div[2]/div/div[1]/div/div/h3/a")
-    private WebElement link;
+    private WebElement firstLink;
 
     public GoogleResultPageWithFactory(WebDriver driver) {
         super(driver);
     }
 
-    public WebElement getLink() {
-        return link;
+    public WebElement getFirstLink() {
+        return firstLink;
     }
 }
