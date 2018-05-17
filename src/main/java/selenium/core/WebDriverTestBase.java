@@ -14,7 +14,7 @@ import static org.openqa.selenium.remote.BrowserType.FIREFOX;
 
 public class WebDriverTestBase {
     protected WebDriver driver;
-    private String browser = System.getProperty("browser", FIREFOX);
+    private String browser = System.getProperty("browser", CHROME);
 
     @BeforeClass
     public void setUp() {
