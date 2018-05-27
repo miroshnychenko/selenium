@@ -17,7 +17,7 @@ public class AlertTest extends WebDriverTestBase{
         alertPage.switchToFrame();
         alertPage.clickOnTryButton();
         alertPage.clickOkOnAlert();
-        Assert.assertTrue(alertPage.VerifyConfirmationText("You pressed CA!"));
+        Assert.assertTrue(alertPage.VerifyConfirmationText("You pressed OK!"));
         alertPage.clickOnTryButtonWithJS();
         alertPage.clickCancelOnAlert();
         Assert.assertTrue(alertPage.VerifyConfirmationText("You pressed Cancel!"));
