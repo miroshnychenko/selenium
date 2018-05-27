@@ -23,7 +23,7 @@ public class GoogleSearchTest extends WebDriverTestBase {
         String actual = resultPage.getFirstLink().getText();
 
 
-        Assert.assertTrue(actual.contains("asdqwe"), "\nExpected: Link text should contain " + searchQuery
+        Assert.assertTrue(actual.contains(searchQuery), "\nExpected: Link text should contain " + searchQuery
                 + "\nActual: Link text is :" + actual + "\n");
         Assert.assertTrue(resultPage.isPageTitleCorrect("Selenium - Пошук Google"));
     }
