@@ -4,9 +4,6 @@
             <!--To run test by classes-->
             <classes>
                 <class name="com.google.GoogleSearchTest" />
-                <class name="com.google.GoogleSearchTestWithFactory" />
-                <class name="learnJavaScript.DragAndDropTest" />
-                <class name="ua.com.stylus.StylusTest" />
             </classes>
         </test>
         <!--To run tests by packages-->

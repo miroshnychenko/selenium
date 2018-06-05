@@ -1,5 +1,6 @@
 package selenium.pages.google.search;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,11 +14,12 @@ public class GoogleResultPage extends AbstractPage{
     public GoogleResultPage(WebDriver driver) {
         super(driver);
     }
-
+    @Step("Get first link")
     public WebElement getFirstLink() {
         return driver.findElement(linkLocator);
     }
 
+    @Step("Check page title")
     public boolean isPageTitleCorrect(String title) {
         return wait.until(ExpectedConditions.titleIs(title));
     }

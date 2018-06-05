@@ -1,5 +1,6 @@
 package selenium.core;
 
+import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -36,6 +37,11 @@ public class TestListener implements ITestListener {
             e.printStackTrace();
         }
 
+    }
+
+    @Attachment(value = "{0}", type = "image/png")
+    public byte[] saveScreenshot(String attachName) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     @Override
