@@ -1,6 +1,5 @@
 package com.google;
 
-import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;

@@ -14,6 +14,7 @@ public class GoogleResultPage extends AbstractPage{
     public GoogleResultPage(WebDriver driver) {
         super(driver);
     }
+
     @Step("Get first link")
     public WebElement getFirstLink() {
         return driver.findElement(linkLocator);
