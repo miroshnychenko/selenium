@@ -12,6 +12,14 @@
                 <package name="w3schools" />
             </packages>
         </test>
-
+        <test name="Windows + FireFox Test">
+            <parameters>
+                <parameter name="platform" value="SIERRA" />
+                <parameter name="remoteBrowser" value="firefox" />
+            </parameters>
+            <classes>
+                <class name="com.google.GoogleSearchTest" />
+            </classes>
+        </test>
     </tests>
 </suite>
