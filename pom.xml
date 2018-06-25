@@ -17,15 +17,23 @@
         <aspectj.version>1.8.13</aspectj.version>
         <maven.surefire.plugin>2.20.1</maven.surefire.plugin>
         <io.cucumber.version>2.3.1</io.cucumber.version>
+        <selenide.version>4.8</selenide.version>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <!--Use Selenide or Selenium depends on needs-->
         <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <!--<dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.11.0</version>
-        </dependency>
+        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
@@ -75,7 +83,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/conf.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/paralell-conf.xml</suiteXmlFile>
                         <!--You can pas your suite xml like "mvn
                         clean test -DsuiteXmlFile=src/test/resources/conf.xml"-->
                         <!--<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->

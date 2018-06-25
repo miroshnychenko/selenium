@@ -1,31 +1,29 @@
 package com.google;
 
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import selenium.core.PropertiesCache;
 import selenium.core.WebDriverTestBase;
-import selenium.pages.google.search.GoogleResultPage;
-import selenium.pages.google.search.GoogleSearchPage;
 
-@Listeners({selenium.core.TestListener.class})
+import static org.testng.AssertJUnit.assertTrue;
+
+
 
 public class GoogleSearchTest extends WebDriverTestBase {
-    private String searchQuery = String.valueOf(PropertiesCache.getProperty("google.search.searchQuery"));
+
+    private String googleSearch = "https://www.google.com.ua/";
+    private String searchText = "Selenium";
+
 
     @Test
     public void searchTest() {
-
-        GoogleSearchPage searchPage = new GoogleSearchPage(driver);
-        searchPage.get("https://google.com.ua");
-        searchPage.search(searchQuery);
-
-        GoogleResultPage resultPage = new GoogleResultPage(driver);
-        String actual = resultPage.getFirstLink().getText();
-
-        Assert.assertTrue(actual.contains(searchQuery), "\nExpected: Link text should contain " + searchQuery
-                + "\nActual: Link text is :" + actual + "\n");
-        Assert.assertTrue(resultPage.isPageTitleCorrect("Selenium - Пошук Google"));
+        driver.get(googleSearch);
+        By searchLocator = By.name("q");
+        WebElement searchField = driver.findElement(searchLocator);
+        searchField.sendKeys(searchText);
+        searchField.submit();
+        By linkLocator = By.xpath(".//*[@id='rso']/div[2]/div/div[1]/div/div/h3/a");
+        WebElement link = driver.findElement(linkLocator);
+        assertTrue(link.getText().contains(searchText));
     }
-
 }
